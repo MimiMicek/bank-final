@@ -1,5 +1,7 @@
 <?php
 
+require_once __DIR__.'/../connect.php';
+
 ini_set('display_errors', 0);
 
 $fName = $_POST['regFName'] ?? '';
@@ -54,10 +56,32 @@ $confirmPassword = $_POST['regConfirmPassword'] ?? '';
 if(empty($confirmPassword)){ sendResponse(0, __LINE__, "Please enter confirm password!"); }
 if($password != $confirmPassword){ sendResponse(0, __LINE__, "Passwords do not match!"); }
 
-//TODO connect to the database at the top and do a query to insert data
+try {
+
+    $stmt = $db->prepare('INSERT INTO users 
+                VALUES(null,:fName, :lName, :address, :city, :postalCode, :cpr, :phone, :email, :password)');
+
+    $stmt->bindValue(':fName', $fName);
+    $stmt->bindValue(':lName', $lName);
+    $stmt->bindValue(':address', $address);
+    $stmt->bindValue(':city', $city);
+    $stmt->bindValue(':postalCode', $postalCode);
+    $stmt->bindValue(':cpr', $cpr);
+    $stmt->bindValue(':phone', $phone);
+    $stmt->bindValue(':email', $email);
+    $stmt->bindValue(':password', $password);
+    $stmt->execute();
+
+    echo 'Success';
+
+} catch (PDOException $ex) {
+    echo $ex;
+}
+
 
 sendResponse(1, __LINE__, "Successfully saved to the database!");
 
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 function sendResponse($bStatus, $iLineNumber, $sMessage){
     echo '{"status":'.$bStatus.', "code":'.$iLineNumber.', "message":'.$sMessage.'}';
     exit;
