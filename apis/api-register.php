@@ -69,7 +69,7 @@ try {
     $stmt->bindValue(':cpr', $cpr);
     $stmt->bindValue(':phone', $phone);
     $stmt->bindValue(':email', $email);
-    $stmt->bindValue(':password', $password);
+    $stmt->bindValue(':password', $password.hash(1, PASSWORD_DEFAULT));
     $stmt->execute();
 
     echo 'Success';
