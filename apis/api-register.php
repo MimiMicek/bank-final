@@ -56,6 +56,8 @@ $confirmPassword = $_POST['regConfirmPassword'] ?? '';
 if(empty($confirmPassword)){ sendResponse(0, __LINE__, "Please enter confirm password!"); }
 if($password != $confirmPassword){ sendResponse(0, __LINE__, "Passwords do not match!"); }
 
+//TODO check if the email is already in the database
+
 try {
 
     $stmt = $db->prepare('INSERT INTO users 

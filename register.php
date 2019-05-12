@@ -17,7 +17,7 @@
 </div>
 <div class="container-fluid">
     <h1>Register</h1>
-<!--    <form id="regForm" action="apis/api-register.php" method="POST">
+    <form id="regForm" action="apis/api-register.php" method="POST">
         <p>
             <label for="regFName">First name</label>
             <input id="regFName" name="regFName" type="text" minlength="2" maxlength="20" required>
@@ -61,7 +61,7 @@
         <p>
             <button type="submit" name="regButton">Register</button>
         </p>
-    </form>-->
+    </form>
 </div>
 <?php require_once 'bottom.php';?>
 

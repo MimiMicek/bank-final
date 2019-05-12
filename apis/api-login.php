@@ -36,10 +36,11 @@ try{
 
 }*/
 
-/*session_start();
-$_SESSION['sUserId'] = $email;*/
-
+session_start();
+$_SESSION['sUserId'] = $email;
+header("Location: ../index");
 sendResponse(1, __LINE__, "Successfully logged in!");
+
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 function sendResponse($bStatus, $iLineNumber, $sMessage){
