@@ -1,0 +1,57 @@
+html, body{
+    padding: 0;
+    margin: 0;
+    height: 100%;
+}
+
+#background{
+    background-image: url("../images/reg_wallpaper.jpg");
+    min-height: 100%;
+    min-width: 1024px;
+    background-size: cover;
+    width: 100%;
+    height: auto;
+    position: fixed;
+    top: 0;
+    left: 0;
+
+}
+
+#loginContainer * {
+    color: blanchedalmond;
+    font-family: 'Jura', sans-serif;
+    box-sizing: border-box;
+}
+
+#loginContainer{
+    width: 80%;
+    margin: 0 auto;
+    position: relative;
+    max-width: 1024px;
+    overflow-scrolling: auto;
+}
+
+#inputContainer{
+    width: 400px;
+    padding: 45px;
+    float: contour;
+    border-right: 1px solid blanchedalmond;
+
+}
+
+#inputContainer h1{
+    text-align: center;
+}
+
+#inputContainer input[type="text"],
+#inputContainer input[type="email"],
+#inputContainer input[type="password"],
+#inputContainer input[type="tel"]{
+    display: block;
+    background-color: transparent;
+    border: 0;
+    border-bottom: 1px solid blanchedalmond;
+    height: 27px;
+    line-height: 27px;
+    width: 100%;
+}
