@@ -22,7 +22,7 @@ html, body{
 
 #loginContainer * {
     color: blanchedalmond;
-    font-family: 'Jura', sans-serif;
+    font-family: 'Dosis', sans-serif;
     box-sizing: border-box;
     font-weight: normal;
     line-height: 1em;
@@ -135,13 +135,13 @@ html, body{
 }
 
 #loginText h1{
-    color: darksalmon;
-    font-size: 60px;
+    color: blanchedalmond;
+    font-size: 40px;
     font-weight: bold;
 }
 
 #loginText h2{
-    margin: 35px 0;
+    margin: 25px 0;
 }
 
 #loginText ul{
@@ -149,6 +149,9 @@ html, body{
 }
 
 #loginText li{
-    font-size: 20px;
-    list-style-type: disc;
+    font-size: 18px;
+    list-style-type: none;
+    padding: 5px 30px;
+    background: url("../images/trust.png") no-repeat 0 0;
+
 }

@@ -1,7 +1,7 @@
-<?php require_once 'top.php';?>
+<?php require_once 'top.php';
 
-<?php
-    if(isset($_POST['regButton'])) {
+
+/*    if(isset($_POST['regButton'])) {
         echo '<script>   
                  $(document).ready(function () {
                         $("#hideRegister").click(function () {
@@ -21,7 +21,7 @@
                     })
                 });
             </script>';
-    }
+    }*/
 ?>
 
 <div id="background">
@@ -98,11 +98,13 @@
             </form>
         </div>
         <div id="loginText">
-            <h1>Central Bank</h1>
+            <h1>Welcome to Central Bank</h1>
             <h2>Making a Difference to Those Who Make a Difference.</h2>
             <ul>
-                <li>Make it easy.</li>
-                <li>Here for You, every Day.</li>
+                <li>Make it easy</li>
+                <li>Here for You, every Day</li>
+                <li>Fund Your Future</li>
+                <li>Expect More</li>
             </ul>
         </div>
     </div>
