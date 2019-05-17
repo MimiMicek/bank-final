@@ -1,10 +1,35 @@
 <?php require_once 'top.php';?>
 
+<?php
+    if(isset($_POST['regButton'])) {
+        echo '<script>   
+                 $(document).ready(function () {
+                        $("#hideRegister").click(function () {
+                            $("#logForm").hide();
+                            $("#regForm").show();
+                
+                        })
+                    });
+                </script>';
+  }else{
+        '<script>   
+             $(document).ready(function () {
+                    $("#hideRegister").click(function () {
+                        $("#logForm").show();
+                        $("#regForm").hide();
+            
+                    })
+                });
+            </script>';
+    }
+?>
+
 <div id="background">
-    <div id="inputContainer">
-        <div id="loginContainer" class="container-fluid">
-            <h2>Log in</h2>
+    <div id="loginContainer">
+        <div id="inputContainer">
+
             <form id="logForm" action="apis/api-login.php" method="POST">
+                <h2>Log in</h2>
                 <p >
                     <label for="logEmail">Email</label>
                     <input id="logEmail" name="logEmail" type="email" required>
@@ -15,11 +40,15 @@
                 </p>
                 <p>
                     <button type="submit" name="logButton">Log in</button>
+                    <div class="hasAccount">
+                      <span id="hideLogin">If you do not have an account please click here to Register</span>
+                    </div>
                 </p>
             </form>
 
-            <h2>Register</h2>
+
             <form id="regForm" action="apis/api-register.php" method="POST">
+                <h2>Register</h2>
                 <p>
                     <label for="regFName">First name</label>
                     <input id="regFName" name="regFName" type="text" minlength="2" maxlength="20" required>
@@ -62,8 +91,19 @@
                 </p>
                 <p>
                     <button type="submit" name="regButton">Register</button>
+                    <div class="hasAccount">
+                        <span id="hideRegister">If you already have an account please click here to Log in</span>
+                    </div>
                 </p>
             </form>
+        </div>
+        <div id="loginText">
+            <h1>Central Bank</h1>
+            <h2>Making a Difference to Those Who Make a Difference.</h2>
+            <ul>
+                <li>Make it easy.</li>
+                <li>Here for You, every Day.</li>
+            </ul>
         </div>
     </div>
 </div>

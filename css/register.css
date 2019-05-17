@@ -5,22 +5,27 @@ html, body{
 }
 
 #background{
+    /*
     background-image: url("../images/reg_wallpaper.jpg");
+    */
     min-height: 100%;
     min-width: 1024px;
     background-size: cover;
     width: 100%;
-    height: auto;
-    position: fixed;
-    top: 0;
-    left: 0;
-
+    height: 100%;
+    display: table;
+    /*    position: inherit;
+      top: 0;
+       left: 0;*/
+    background-color: black;
 }
 
 #loginContainer * {
     color: blanchedalmond;
     font-family: 'Jura', sans-serif;
     box-sizing: border-box;
+    font-weight: normal;
+    line-height: 1em;
 }
 
 #loginContainer{
@@ -28,15 +33,39 @@ html, body{
     margin: 0 auto;
     position: relative;
     max-width: 1024px;
+    /*
     overflow-scrolling: auto;
+    */
+}
+
+::-webkit-input-placeholder { /* WebKit, Blink, Edge */
+    color:    #fff;
+}
+:-moz-placeholder { /* Mozilla Firefox 4 to 18 */
+    color:    #fff;
+    opacity:  1;
+}
+::-moz-placeholder { /* Mozilla Firefox 19+ */
+    color:    #fff;
+    opacity:  1;
+}
+:-ms-input-placeholder { /* Internet Explorer 10-11 */
+    color:    #fff;
+}
+::-ms-input-placeholder { /* Microsoft Edge */
+    color:    #fff;
+}
+
+::placeholder { /* Most modern browsers support this now. */
+    color:    #fff;
 }
 
 #inputContainer{
-    width: 400px;
-    padding: 45px;
-    float: contour;
+    width: 600px;
+    padding: 20px;
+    float: inline-start;
     border-right: 1px solid blanchedalmond;
-
+    overflow-scrolling: auto;
 }
 
 #inputContainer h1{
@@ -54,4 +83,72 @@ html, body{
     height: 27px;
     line-height: 27px;
     width: 100%;
+}
+
+#inputContainer input{
+    color: darkgray;
+    font-size: 15px;
+    margin-top: 15px;
+}
+
+#inputContainer button{
+    background-color: blanchedalmond;
+    color: darkgray;
+    border: 2px solid darkgray;
+    border-radius: 250px;
+    display: block;
+    font-weight: bold;
+    font-size: 17px;
+    letter-spacing: 1px;
+    margin: 20px auto;
+    height: 41px;
+    width: 100%;
+}
+
+#inputContainer button:hover {
+    cursor: pointer;
+}
+
+.hasAccount span{
+     font-weight: bold;
+     font-size: 12px;
+ }
+
+
+.hasAccount{
+    text-align: center;
+}
+
+#loginContainer span:hover{
+    cursor: pointer;
+}
+
+#regForm{
+    display: none;
+}
+
+#loginText{
+    padding: 45px;
+    display: table-cell;
+    font-weight: bolder;
+    font-size: larger;
+}
+
+#loginText h1{
+    color: darksalmon;
+    font-size: 60px;
+    font-weight: bold;
+}
+
+#loginText h2{
+    margin: 35px 0;
+}
+
+#loginText ul{
+    padding: 0;
+}
+
+#loginText li{
+    font-size: 20px;
+    list-style-type: disc;
 }
