@@ -29,7 +29,7 @@
         <div id="inputContainer">
 
             <form id="logForm" action="apis/api-login.php" method="POST">
-                <h2>Log in</h2>
+                <h2 class="headline">Log in</h2>
                 <p >
                     <label for="logEmail">Email</label>
                     <input id="logEmail" name="logEmail" type="email" required>
@@ -39,7 +39,7 @@
                     <input id="logPassword" name="logPassword" type="password" minlength="4" maxlength="30" required>
                 </p>
                 <p>
-                    <button type="submit" name="logButton">Log in</button>
+                    <button class="btn btn-outline-light my-2 my-sm-0" type="submit" name="logButton">Log in</button>
                     <div class="hasAccount">
                       <span id="hideLogin">If you do not have an account please click here to Register</span>
                     </div>
@@ -48,7 +48,7 @@
 
 
             <form id="regForm" action="apis/api-register.php" method="POST">
-                <h2>Register</h2>
+                <h2 class="headline">Register</h2>
                 <p>
                     <label for="regFName">First name</label>
                     <input id="regFName" name="regFName" type="text" minlength="2" maxlength="20" required>
@@ -90,7 +90,7 @@
                     <input id="regConfirmPassword" name="regConfirmPassword" type="password" minlength="4" maxlength="30" required>
                 </p>
                 <p>
-                    <button type="submit" name="regButton">Register</button>
+                    <button class="btn btn-outline-light my-2 my-sm-0" type="submit" name="regButton">Register</button>
                     <div class="hasAccount">
                         <span id="hideRegister">If you already have an account please click here to Log in</span>
                     </div>
