@@ -11,6 +11,6 @@ if(!isset($_SESSION['sUserId'])){
     header('Location: register');
 }
 
-$sUserId = $_SESSION['sUserId'];
+$email = $_SESSION['sUserId'];
 
 echo 'XXXX';

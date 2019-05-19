@@ -1,4 +1,15 @@
-<?php require_once 'top.php';?>
+<?php require_once 'top.php';
+
+session_start();
+
+if(!isset($_SESSION['sUserId'])){
+    header('Location: register');
+}
+
+$email = $_SESSION['sUserId'];
+
+
+?>
 
 <!--<div class="topBar">
     <div class="logo">
@@ -41,7 +52,7 @@
         </ul>
         <ul class="navbar-nav mr-0 mt-2 mt-lg-0">
             <li class="nav-item">
-                <a class="nav-link" href="profile">Profile</a>
+                <a class="nav-link" href="profile"><?php echo $email?></a>
             </li>
         </ul>
         <form class="form-inline my-2 my-lg-0">
