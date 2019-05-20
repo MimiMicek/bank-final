@@ -9,8 +9,10 @@ if(!isset($_SESSION['sUserId'])){
 }
 
 $email = $_SESSION['sUserId'];
+echo $email;
 
-$stmt = $db->prepare('SELECT account_name, balance FROM accounts');
+$stmt = $db->prepare('SELECT account_name, balance FROM accounts WHERE user_id=:userId');
+$stmt->bindValue(':userId', $email);
 $stmt->execute();
 $aRows = $stmt->fetchAll();
 
@@ -36,25 +38,30 @@ if(count($aRows) == 0){
     </form>
     <br>
     <div class="row">
-        <div class="col-sm">
-            Account
+        <div class="col-6">
 
-                <?php
+            <h5>Account</h5>
+                <div>
+                    <?php
 
-                foreach($aRows as $aRow){
-                    echo "<div>$aRow->account_name<div>";
-                }
-                ?>
+                    foreach($aRows as $aRow){
+                        echo "<div>$aRow->account_name</div>";
+                    }
 
+                    ?>
+                </div>
         </div>
         <br>
-        <div class="col">
-            Balance
+        <br>
+        <div class="col-6">
 
+            <h5>Balance</h5>
+            <div>
                 <?php
 
                 foreach($aRows as $aRow){
-                    echo "<div>$aRow->balance<div>";
+                    echo "<div>$aRow->balance</div>";
+
                 }
                 ?>
             </div>

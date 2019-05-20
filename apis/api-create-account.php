@@ -8,7 +8,7 @@ if(!isset($_SESSION['sUserId'])){
     header('Location: register');
 }
 
-$email = $_SESSION['sUserId'];
+$userId = $_SESSION['sUserId'];
 $chosenOption = $_POST['chosenOption'];
 
 //TODO Pass user_id from the users table
@@ -17,28 +17,22 @@ $chosenOption = $_POST['chosenOption'];
 //TODO SELECT account_name, balance FROM accounts
 //TODO Show it in the frontend
 
+
 try{
-    $stmt = $db->prepare( "SELECT id FROM users WHERE email=:email" );
-
-    $stmt->bindValue(':email', $email );
-
+    $stmt = $db->prepare( "SELECT * FROM accounts WHERE account_name=:accountName AND user_id=:userId" );
+    $stmt->bindValue(':accountName', $chosenOption);
+    $stmt->bindValue(':userId', $userId );
     $stmt->execute();
-
     $aRows = $stmt->fetchAll();
 
- /*   if( count($aRows) == 0 ){
-        echo 'Sorry, no id found!';
+    if( count($aRows) > 0 ){
+        echo 'Sorry, you already have this type of account!';
         exit;
-    }*/
-
-    foreach($aRows as $aRow){
-        $userId = "<div>$aRow->id<div>";
     }
-
-    echo 'Success';
 }catch( PDOEXception $ex ){
     echo $ex;
 }
+
 
 //TODO check if account is already in the database
 try{
@@ -46,14 +40,10 @@ try{
                 VALUES(null,:accountName, 0.00, :userId)');
 
     $stmt->bindValue(':accountName', $chosenOption);
-    $stmt->bindValue(':userId', $aRow->id);
+    $stmt->bindValue(':userId', $userId);
 
     $stmt->execute();
 
-/*    if( count($aRows) > 0 ){
-        echo 'Sorry, you already have this type of account!';
-        exit;
-    }*/
 
 }catch( PDOEXception $ex ){
     echo $ex;

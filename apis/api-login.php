@@ -16,7 +16,7 @@ if(strlen($password) < 4){ sendResponse(0, __LINE__, "Passwords cannot be less t
 if(strlen($password) > 30){ sendResponse(0, __LINE__, "Passwords cannot be longer than 30 characters!"); }
 
 try{
-    $stmt = $db->prepare( "SELECT email FROM users WHERE email=:email AND password=:password" );
+    $stmt = $db->prepare( "SELECT id, email FROM users WHERE email=:email AND password=:password" );
     $stmt->bindValue(':email', $email );
     $stmt->bindValue(':password', $password );
     $stmt->execute();
@@ -27,6 +27,8 @@ try{
         exit;
     }
 
+    $userId = $aRows[0]->id;
+    echo $userId;
 }catch( PDOEXception $ex ){
     echo $ex;
 }
@@ -37,9 +39,9 @@ try{
 }*/
 
 session_start();
-$_SESSION['sUserId'] = $email;
-header("Location: ../index");
-/*sendResponse(1, __LINE__, "Successfully logged in!");*/
+$_SESSION['sUserId'] = $userId;
+/*header("Location: ../index");*/
+sendResponse(1, __LINE__, "Successfully logged in!");
 
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
