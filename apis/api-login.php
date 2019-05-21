@@ -40,7 +40,7 @@ try{
 
 session_start();
 $_SESSION['sUserId'] = $userId;
-/*header("Location: ../index");*/
+header("Location: ../index");
 sendResponse(1, __LINE__, "Successfully logged in!");
 
 

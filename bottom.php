@@ -21,6 +21,5 @@
     });
 
 </script>
-<script src="js/register.js"></script>
 </body>
 </html>

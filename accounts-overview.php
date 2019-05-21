@@ -4,21 +4,30 @@ require_once 'top.php';
 require_once 'header.php';
 require_once __DIR__.'/connect.php';
 
+ini_set('display_errors', 0);
+
 if(!isset($_SESSION['sUserId'])){
     header('Location: register');
 }
 
-$email = $_SESSION['sUserId'];
-echo $email;
+$userId = $_SESSION['sUserId'];
 
-$stmt = $db->prepare('SELECT account_name, balance FROM accounts WHERE user_id=:userId');
-$stmt->bindValue(':userId', $email);
-$stmt->execute();
-$aRows = $stmt->fetchAll();
+try{
 
-if(count($aRows) == 0){
-    echo 'Sorry no accounts found!';
-    exit();
+        $stmt = $db->prepare('SELECT account_name, balance FROM accounts WHERE user_id=:userId');
+
+        $stmt->bindValue(':userId', $userId);
+
+        $stmt->execute();
+
+        $aRows = $stmt->fetchAll();
+
+        if(count($aRows) == 0){
+            echo 'Sorry no accounts found!';
+        }
+
+    } catch (PDOException $ex) {
+        echo $ex;
 }
 
 ?>
@@ -39,7 +48,6 @@ if(count($aRows) == 0){
     <br>
     <div class="row">
         <div class="col-6">
-
             <h5>Account</h5>
                 <div>
                     <?php

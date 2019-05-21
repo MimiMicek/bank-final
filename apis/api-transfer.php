@@ -14,21 +14,25 @@ $fromAccount = $_POST['fromAccount'];
 $text = $_POST['text'];
 $amount = $_POST['amount'];
 
-echo  $userId;
-print_r($_POST);
-//TODO check if the account exists in the db
+/*echo  $userId;
+print_r($_POST);*/
+
 
 try{
     $stmt = $db->prepare( "SELECT * FROM accounts WHERE account_number=:toAccount 
                                     OR (account_number=:fromAccount AND user_id=:userId AND balance > :amount ) " );
+
     $stmt->bindValue(':toAccount', $toAccount );
     $stmt->bindValue(':fromAccount', $fromAccount );
     $stmt->bindValue(':userId', $userId );
     $stmt->bindValue(':amount', $amount );
+
     $stmt->execute();
+
     $aRows = $stmt->fetchAll();
 
-    print_r($aRows);
+/*    print_r($aRows);*/
+
     if( count($aRows) < 2 ){
         echo 'Sorry, no accounts found!'.__LINE__;
         exit;
@@ -37,6 +41,7 @@ try{
 
     $db->beginTransaction();
     $stmt = $db->prepare('UPDATE accounts SET balance = balance - :amount WHERE account_number = :fromAccount ');
+
     $stmt->bindValue(':fromAccount', $fromAccount );
     $stmt->bindValue(':amount', $amount );
 
@@ -48,6 +53,7 @@ try{
     }
 
     $stmt = $db->prepare('UPDATE accounts SET balance = balance + :amount WHERE account_number = :toAccount ');
+
     $stmt->bindValue(':toAccount', $toAccount );
     $stmt->bindValue(':amount', $amount );
 
@@ -61,26 +67,20 @@ try{
 
 
     $stmt = $db->prepare('INSERT INTO transfers VALUES (null, :fromAccount, :toAccount, :amount, :text, null)');
+
     $stmt->bindValue(':fromAccount', $fromAccount );
     $stmt->bindValue(':toAccount', $toAccount );
     $stmt->bindValue(':amount', $amount );
     $stmt->bindValue(':text', $text );
+
     if(  !$stmt->execute() ){ // only works because the line PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION, in the connect.php has been commented out
         echo 'Cannot transfer'.__LINE__;
         $db->rollBack();
         exit;
     }
 
-    /*
-    $balance = file_get_contents('https://example.com/api-get-balance');
-    if( $balance < 500 ){
-      $db->rollBack();
-      exit;
-    }
-    */
 
-// SUCCESS
-    echo 'DONE';
+    echo 'The money was successfully transfered!';
     $db->commit();
 
 

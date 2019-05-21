@@ -10,19 +10,18 @@ if(!isset($_SESSION['sUserId'])){
 
 $userId = $_SESSION['sUserId'];
 $chosenOption = $_POST['chosenOption'];
-
-//TODO Pass user_id from the users table
-//TODO Create a Container with overview of the accounts and the button and dropdown to create a new account
-//TODO Create a new INSERT into accounts table and hook up user_id with user_fk
-//TODO SELECT account_name, balance FROM accounts
-//TODO Show it in the frontend
-
+$accountNumber = mt_rand(1000, 9999);
 
 try{
-    $stmt = $db->prepare( "SELECT * FROM accounts WHERE account_name=:accountName AND user_id=:userId" );
+    //checking if user already has a checking or a savings account
+    $stmt = $db->prepare( "SELECT * FROM accounts WHERE account_name=:accountName 
+                        AND user_id=:userId" );
+
     $stmt->bindValue(':accountName', $chosenOption);
     $stmt->bindValue(':userId', $userId );
+
     $stmt->execute();
+
     $aRows = $stmt->fetchAll();
 
     if( count($aRows) > 0 ){
@@ -34,17 +33,18 @@ try{
 }
 
 
-//TODO check if account is already in the database
 try{
+    //inserting into accounts
     $stmt = $db->prepare('INSERT INTO accounts
-                VALUES(null,:accountName, 0.00, :userId)');
+                VALUES(null,:accountName, :accountNumber, 100.00, :userId)');
 
     $stmt->bindValue(':accountName', $chosenOption);
     $stmt->bindValue(':userId', $userId);
+    $stmt->bindValue(':accountNumber', $accountNumber);
 
     $stmt->execute();
 
-
+    echo 'Success! Account created!';
 }catch( PDOEXception $ex ){
     echo $ex;
 }
