@@ -14,8 +14,7 @@ $fromAccount = $_POST['fromAccount'];
 $text = $_POST['text'];
 $amount = $_POST['amount'];
 
-/*echo  $userId;
-print_r($_POST);*/
+//TODO check transfers - not working properly
 
 
 try{
@@ -40,7 +39,7 @@ try{
 
 
     $db->beginTransaction();
-    $stmt = $db->prepare('UPDATE accounts SET balance = balance - :amount WHERE account_number = :fromAccount ');
+    $stmt = $db->prepare('UPDATE accounts SET balance = balance - :amount WHERE account_number = :fromAccount AND balance > :amount ');
 
     $stmt->bindValue(':fromAccount', $fromAccount );
     $stmt->bindValue(':amount', $amount );
