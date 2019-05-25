@@ -32,14 +32,14 @@ try{
     echo $ex;
 }
 ?>
-
+<br>
 <div id="userContainer" class="container">
     <div class="row">
         <div id="userDetailsContainer" class="col-6">
             <form id="profile" action="apis/api-delete-profile.php" method="POST">
                 <h2 class="headline">Profile</h2>
                 <p>
-                    <label for="fullName">Full name</label>
+                    <label for="fullName">Full name: </label>
                     <span id="fullName">
                         <?php
                             foreach ($aRows as $aRow){
@@ -49,7 +49,7 @@ try{
                     </span>
                 </p>
                 <p>
-                    <label for="address">Address</label>
+                    <label for="address">Address: </label>
                     <span id="address">
                         <?php
                             foreach ($aRows as $aRow){
@@ -59,7 +59,7 @@ try{
                     </span>
                 </p>
                 <p>
-                    <label for="city">City</label>
+                    <label for="city">City: </label>
                     <span id="city">
                         <?php
                             foreach ($aRows as $aRow){
@@ -69,7 +69,7 @@ try{
                     </span>
                 </p>
                 <p>
-                    <label for="postalCode">Postal code</label>
+                    <label for="postalCode">Postal code:</label>
                     <span id="postalCode">
                         <?php
                             foreach ($aRows as $aRow){
@@ -79,7 +79,7 @@ try{
                     </span>
                 </p>
                 <p>
-                    <label for="cpr">Cpr</label>
+                    <label for="cpr">Cpr: </label>
                     <span id="cpr">
                         <?php
                             foreach ($aRows as $aRow){
@@ -89,7 +89,7 @@ try{
                     </span>
                 </p>
                 <p>
-                    <label for="phone">Phone</label>
+                    <label for="phone">Phone: </label>
                     <span id="phone">
                         <?php
                             foreach ($aRows as $aRow){
@@ -99,7 +99,7 @@ try{
                     </span>
                 </p>
                 <p>
-                    <label for="email">Email</label>
+                    <label for="email">Email: </label>
                     <span id="email">
                         <?php
                             foreach ($aRows as $aRow){
@@ -109,7 +109,7 @@ try{
                     </span>
                 </p>
                 <p>
-                    <label for="password">Password</label>
+                    <label for="password">Password: </label>
                     <span id="password">
                         <?php
                             foreach ($aRows as $aRow){

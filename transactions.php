@@ -11,14 +11,20 @@ if(!isset($_SESSION['sUserId'])){
 
 $userId = $_SESSION['sUserId'];
 
+
 try{
-    $stmt = $db->prepare( "SELECT DISTINCT id, fromAccount_number, amount, text, timestamp FROM transfers WHERE :userId" );
+    $stmt = $db->prepare( "SELECT accounts.account_number, CONCAT (accounts.account_name) AS account_name, 
+                                    transfers.fromAccount_number, transfers.toAccount_number, transfers.amount, transfers.text, transfers.timestamp 
+                                    FROM accounts 
+                                    INNER JOIN transfers 
+                                    ON accounts.account_number = transfers.fromAccount_number
+                                    WHERE accounts.user_id = :userId" );
     $stmt->bindValue(':userId', $userId );
     $stmt->execute();
     $aRows = $stmt->fetchAll();
 
     if( count($aRows) == 0 ){
-        echo 'Sorry, no user with that credentials found!';
+        echo 'Sorry, no transactions found!';
         exit;
     }
 
@@ -27,15 +33,15 @@ try{
 }
 
 ?>
-
+<br>
 <div class="container">
     <div class="row">
         <div class="col-sm">
-           <h5>Transfer id </h5>
+            <h5>Date and time</h5>
             <?php
 
             foreach($aRows as $aRow){
-                echo "<div>$aRow->id</div>";
+                echo "<div>$aRow->timestamp</div>";
             }
 
             ?>
@@ -51,12 +57,22 @@ try{
             ?>
         </div>
         <div class="col-sm">
-            <h5>Account name </h5>
+            <h5>To account </h5>
             <?php
 
             foreach($aRows as $aRow){
-                echo "<div>$aRow->amount</div>";
+                echo "<div>$aRow->toAccount_number</div>";
             }
+
+            ?>
+        </div>
+        <div class="col-sm">
+            <h5>Account name </h5>
+            <?php
+
+             foreach($aRows as $aRow){
+                    echo "<div>$aRow->account_name</div>";
+                }
 
             ?>
         </div>
@@ -80,15 +96,6 @@ try{
 
             ?>
         </div>
-        <div class="col-sm">
-            <h5>Date and time</h5>
-            <?php
 
-            foreach($aRows as $aRow){
-                echo "<div>$aRow->timestamp</div>";
-            }
-
-            ?>
-        </div>
     </div>
 </div>
