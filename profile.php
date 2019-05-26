@@ -16,7 +16,13 @@ $userId = $_SESSION['sUserId'];
 
 try{
     //TODO fetching all users details
-   $stmt = $db->prepare('SELECT * FROM users WHERE id=:userId');
+   $stmt = $db->prepare('SELECT u.first_name, u.last_name, cities.name, u.address, postal_codes.code, u.cpr, u.phone, u.email, u.password 
+                                    FROM users as u 
+                                    INNER JOIN postal_codes 
+                                    ON postal_codes.id = u.postal_code_id
+                                    INNER JOIN cities
+                                    ON cities.id = postal_codes.city_id 
+                                    WHERE u.id = :userId');
 
     $stmt->bindValue(':userId', $userId);
 
@@ -63,7 +69,7 @@ try{
                     <span id="city">
                         <?php
                             foreach ($aRows as $aRow){
-                                echo $aRow->city;
+                                echo $aRow->name;
                             }
                         ?>
                     </span>
@@ -73,7 +79,7 @@ try{
                     <span id="postalCode">
                         <?php
                             foreach ($aRows as $aRow){
-                                echo $aRow->postal_code;
+                                echo $aRow->code;
                             }
                         ?>
                     </span>

@@ -59,15 +59,37 @@ if($password != $confirmPassword){ sendResponse(0, __LINE__, "Passwords do not m
 //TODO check if the email is already in the database
 
 try {
+    //select the id from the cities table
+    $stmt = $db->prepare('SELECT postal_codes.id 
+                                    FROM postal_codes 
+                                    INNER JOIN cities 
+                                    ON cities.id = postal_codes.city_id 
+                                    WHERE postal_codes.code = :postalCode 
+                                    AND cities.name = :city');
+    $stmt->bindValue(':city', $city);
+    $stmt->bindValue(':postalCode', $postalCode);
+    $stmt->execute();
 
-    $stmt = $db->prepare('INSERT INTO users 
-                VALUES(null,:fName, :lName, :address, :city, :postalCode, :cpr, :phone, :email, :password)');
+    $aRows = $stmt->fetch();
+
+    var_dump($aRows);
+
+
+    if( $aRows === false ){
+        echo 'Sorry, you already have this type of account!';
+        exit;
+    }
+
+    $stmt = $db->prepare('INSERT INTO users
+                VALUES(null,:fName, :lName, :address, :postalCode, :cpr, :phone, :email, :password)');
+
+    //select it from city table to get the id and put it into the user table
 
     $stmt->bindValue(':fName', $fName);
     $stmt->bindValue(':lName', $lName);
     $stmt->bindValue(':address', $address);
-    $stmt->bindValue(':city', $city);
-    $stmt->bindValue(':postalCode', $postalCode);
+  /*  $stmt->bindValue(':city', $city);*/
+   $stmt->bindValue(':postalCode', $aRows->id);
     $stmt->bindValue(':cpr', $cpr);
     $stmt->bindValue(':phone', $phone);
     $stmt->bindValue(':email', $email);

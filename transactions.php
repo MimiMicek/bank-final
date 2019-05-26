@@ -13,7 +13,7 @@ $userId = $_SESSION['sUserId'];
 
 
 try{
-    $stmt = $db->prepare( "SELECT accounts.account_number, CONCAT (accounts.account_name) AS account_name, 
+    $stmt = $db->prepare( "SELECT accounts.account_number, accounts.account_name AS account_name, 
                                     transfers.fromAccount_number, transfers.toAccount_number, transfers.amount, transfers.text, transfers.timestamp 
                                     FROM accounts 
                                     INNER JOIN transfers 
