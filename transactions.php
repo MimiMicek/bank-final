@@ -19,14 +19,19 @@ try{
                                     INNER JOIN transfers 
                                     ON accounts.account_number = transfers.fromAccount_number
                                     WHERE accounts.user_id = :userId" );
+
     $stmt->bindValue(':userId', $userId );
+
     $stmt->execute();
+
     $aRows = $stmt->fetchAll();
+
 
     if( count($aRows) == 0 ){
         echo 'Sorry, no transactions found!';
         exit;
     }
+
 
 }catch( PDOEXception $ex ){
     echo $ex;
