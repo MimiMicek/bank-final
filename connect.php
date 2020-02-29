@@ -4,7 +4,7 @@ try{
 
   $sUserName = 'root';//never be root user in real life
   $sPassword = '';
-  $sConnection = "mysql:host=localhost; dbname=bank-final; charset=utf8mb4";
+  $sConnection = "mysql:host=localhost; dbname=database; charset=utf8mb4";
   
   $aOptions = array(
    /* PDO::ATTR_ERRMODE            => PDO::ERRMODE_EXCEPTION,*/
